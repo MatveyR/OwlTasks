@@ -1,4 +1,4 @@
-import {Button, Form, Input} from 'antd';
+import {Button, Form, Input, message} from 'antd';
 import authService from "../services/auth.service";
 import {Link, useNavigate} from "react-router-dom";
 import {Header} from "antd/es/layout/layout";
@@ -33,13 +33,22 @@ const tailFormItemLayout = {
         },
     },
 };
+
 const RegistrationPage = () => {
+    const navigate = useNavigate();
+
     const [form] = Form.useForm();
+
     const onFinish = (values) => {
         authService.register(values)
+        message.success("Вы успешно зарегистрировались!");
+        navigate("/workspace");
     };
 
-    const navigate = useNavigate();
+    function Registered() {
+        message.success("Вы успешно зарегистрировались!");
+        navigate('/workspace');
+    }
 
     return (
         <Header
@@ -96,7 +105,6 @@ const RegistrationPage = () => {
                     rules={[
                         {
                             type: 'email',
-                            message: 'Пожалуйста, введите почту!',
                         },
                         {
                             required: true,
@@ -112,7 +120,7 @@ const RegistrationPage = () => {
                           style={{padding: "30px"}}>
                         Уже есть аккаунт?
                     </Link>
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" onClick={Registered}>
                         Зарегистрироваться
                     </Button>
                 </Form.Item>

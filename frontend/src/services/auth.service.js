@@ -4,7 +4,7 @@ const API_URL = "api/auth/";
 
 const register = (registration) => {
     const {username, email, password} = registration;
-    return axios.post(API_URL + "signup", {
+    return axios.post("/workspace", {
         username,
         email,
         password,

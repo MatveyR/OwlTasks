@@ -1,10 +1,22 @@
-import {Button, Checkbox, Form, Input} from 'antd';
+import {Button, Checkbox, Form, Input, message} from 'antd';
 import {Link, useNavigate} from "react-router-dom";
 import {Header} from "antd/es/layout/layout";
+import authService from "../services/auth.service";
 
 const LoginPage = () => {
 
     const navigate = useNavigate();
+
+    const onFinish = (values) => {
+        authService.register(values);
+        message.success("Вы успешно вошли");
+        navigate("/workspace");
+    };
+
+    function Logined() {
+        message.success("Вы успешно вошли!");
+        navigate('/workspace');
+    }
 
     return (
         <Header
@@ -16,6 +28,7 @@ const LoginPage = () => {
             />
             <h1 style={{color: "white", cursor: "pointer"}} onClick={() => navigate('/')}>TaskOwl</h1>
             <Form
+                className="login_form"
                 name="basic"
                 labelCol={{
                     span: 12,
@@ -25,13 +38,15 @@ const LoginPage = () => {
                 }}
                 style={{
                     maxWidth: 900,
-                    position: 'absolute', left: '35%', top: '35%',
+                    position: 'fixed', left: '35%', top: '35%',
+                    border: "5px",
                 }}
                 initialValues={{
                     remember: true,
                 }}
                 autoComplete="off"
                 size="large"
+                onFinish={onFinish}
             >
                 <Form.Item
                     label="Логин"
@@ -81,7 +96,7 @@ const LoginPage = () => {
                           style={{padding: "10px"}}>
                         Нет аккаунта?
                     </Link>
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" onClick={Logined}>
                         Войти
                     </Button>
                 </Form.Item>
