@@ -1,5 +1,7 @@
 import {Button, Form, Input} from 'antd';
 import authService from "../services/auth.service";
+import {Link, useNavigate} from "react-router-dom";
+import {Header} from "antd/es/layout/layout";
 
 const formItemLayout = {
     labelCol: {
@@ -37,68 +39,86 @@ const RegistrationPage = () => {
         authService.register(values)
     };
 
+    const navigate = useNavigate();
+
     return (
-        <Form
-            {...formItemLayout}
-            form={form}
-            name="register"
-            onFinish={onFinish}
-            style={{
-                maxWidth: 600,
-                padding: '20px 50px'
-            }}
-            scrollToFirstError
-        >
-            <Form.Item
-                name="username"
-                label="Логин"
-                rules={[
-                    {
-                        required: true,
-                        whitespace: true,
-                    },
-                ]}
+        <Header
+            style={{display: 'flex', alignItems: 'center', backgroundColor: "#423189", justifyContent: 'flex-start'}}>
+            <img src={require("../images/head_owl.png")}
+                 style={{alignSelf: "center", backgroundColor: "transparent", cursor: "pointer"}}
+                 width={"45px"}
+                 onClick={() => navigate('/')}
+            />
+            <h1 style={{color: "white", cursor: "pointer"}} onClick={() => navigate('/')}>TaskOwl</h1>
+            <Form
+                {...formItemLayout}
+                form={form}
+                name="register"
+                onFinish={onFinish}
+                style={{
+                    maxWidth: 600,
+                    position: 'absolute', left: '35%', top: '35%',
+                }}
+                scrollToFirstError
+                size="large"
             >
-                <Input />
-            </Form.Item>
+                <Form.Item
+                    name="username"
+                    label="Логин"
+                    rules={[
+                        {
+                            required: true,
+                            whitespace: true,
+                            message: "Пожалуйста, введите логин!"
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
 
-            <Form.Item
-                name="password"
-                label="Пароль"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please input your password!',
-                    },
-                ]}
-                hasFeedback
-            >
-                <Input.Password />
-            </Form.Item>
+                <Form.Item
+                    name="password"
+                    label="Пароль"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Пожалуйста, введите пароль!',
+                        },
+                    ]}
+                    hasFeedback
+                >
+                    <Input.Password />
+                </Form.Item>
 
-            <Form.Item
-                name="email"
-                label="E-mail"
-                rules={[
-                    {
-                        type: 'email',
-                        message: 'The input is not valid E-mail!',
-                    },
-                    {
-                        required: true,
-                        message: 'Please input your E-mail!',
-                    },
-                ]}
-            >
-                <Input />
-            </Form.Item>
+                <Form.Item
+                    name="email"
+                    label="E-mail"
+                    rules={[
+                        {
+                            type: 'email',
+                            message: 'Пожалуйста, введите почту!',
+                        },
+                        {
+                            required: true,
+                            message: 'Пожалуйста, введите почту!',
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
 
-            <Form.Item {...tailFormItemLayout}>
-                <Button type="primary" htmlType="submit">
-                    Зарегистрироваться
-                </Button>
-            </Form.Item>
-        </Form>
+                <Form.Item {...tailFormItemLayout}>
+                    <Link to="/login"
+                          style={{padding: "30px"}}>
+                        Уже есть аккаунт?
+                    </Link>
+                    <Button type="primary" htmlType="submit">
+                        Зарегистрироваться
+                    </Button>
+                </Form.Item>
+            </Form>
+        </Header>
     );
 };
+
 export default RegistrationPage;
