@@ -6,9 +6,7 @@ import HomePage from "./pages/HomePage";
 import WorkspacePage from "./pages/WorkspacePage";
 import {createGlobalStyle} from 'styled-components';
 
-const GlobalStyle = createGlobalStyle`
-  ${require('./App.css')}
-`;
+createGlobalStyle `${require('./App.css')}`;
 
 export default function App() {
    return (

@@ -1,4 +1,4 @@
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {Header} from "antd/es/layout/layout";
 import {Menu} from "antd";
 import React, { useState } from 'react';
@@ -7,21 +7,6 @@ import {
     DeleteOutlined,
     SnippetsOutlined
 } from '@ant-design/icons';
-function getItem(label, key, icon, children, type) {
-    return {
-        key,
-        icon,
-        children,
-        label,
-        type,
-    };
-}
-const items = [
-    getItem('Мои задачи', '1', <SnippetsOutlined />),
-    getItem('Архив', '2', <FolderOutlined />),
-    getItem('Удалённое', '3', <DeleteOutlined />),
-];
-
 
 const WorkspacePage = () => {
     const navigate = useNavigate();
@@ -48,7 +33,6 @@ const WorkspacePage = () => {
                 mode="inline"
                 theme="light"
                 inlineCollapsed={collapsed}
-                items={items}
                 style={{color: "black",
                     position: "fixed",
                     left: 0,
@@ -61,7 +45,17 @@ const WorkspacePage = () => {
                     borderStyle: "double",
                     borderWidth: "10px"
                 }}
-            />
+            >
+                <Menu.Item icon={<SnippetsOutlined/>} onClick={() => navigate("/workspace/my_tasks")}>
+                    <p>Мои задачи</p>
+                </Menu.Item>
+                <Menu.Item icon={<FolderOutlined/>} onClick={() => navigate("/workspace/archive")}>
+                    <p>Архив</p>
+                </Menu.Item>
+                <Menu.Item icon={<DeleteOutlined/>} onClick={() => navigate("/workspace/bin")}>
+                    <p>Удалённое</p>
+                </Menu.Item>
+            </Menu>
         </Header>
     );
 }
