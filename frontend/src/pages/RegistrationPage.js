@@ -42,12 +42,12 @@ const RegistrationPage = () => {
     const onFinish = (values) => {
         authService.register(values)
         message.success("Вы успешно зарегистрировались!");
-        navigate("/workspace");
+        navigate("/workspace/my_tasks")
     };
 
     function Registered() {
         message.success("Вы успешно зарегистрировались!");
-        navigate('/workspace');
+        navigate('/workspace/my_tasks');
     }
 
     return (

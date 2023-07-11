@@ -10,12 +10,12 @@ const LoginPage = () => {
     const onFinish = (values) => {
         authService.register(values);
         message.success("Вы успешно вошли");
-        navigate("/workspace");
+        navigate("/workspace/my_tasks");
     };
 
     function Logined() {
         message.success("Вы успешно вошли!");
-        navigate('/workspace');
+        navigate("/workspace/my_tasks");
     }
 
     return (
