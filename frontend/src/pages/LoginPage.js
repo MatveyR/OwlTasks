@@ -1,58 +1,68 @@
-import {LockOutlined, UserOutlined} from '@ant-design/icons';
-import {Button, Form, Input} from 'antd';
-import authService from "../services/auth.service";
-import {useDispatch} from "react-redux";
-import {login} from "../slices/authSlice";
-import {useNavigate} from "react-router-dom";
+import {Button, Checkbox, Form, Input} from 'antd';
 
 const LoginPage = () => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-
-    const onFinish = (values) => {
-        authService.login(values).then((user) => {
-            console.log(user)
-            dispatch(login(user))
-            navigate("/")
-        })
-    };
     return (
         <Form
-            name="normal_login"
-            className="login-form"
-            onFinish={onFinish}
-            style={{padding: '20px 50px'}}
+            name="basic"
+            labelCol={{
+                span: 8,
+            }}
+            wrapperCol={{
+                span: 16,
+            }}
+            style={{
+                maxWidth: 600,
+            }}
+            initialValues={{
+                remember: true,
+            }}
+            autoComplete="off"
         >
             <Form.Item
-                name="username"
+                label="Логин"
+                name="логин"
                 rules={[
                     {
                         required: true,
-                        message: 'Please input your Username!',
+                        message: 'Пожалуйста, введите логин!',
                     },
                 ]}
             >
-                <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
-            </Form.Item>
-            <Form.Item
-                name="password"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please input your Password!',
-                    },
-                ]}
-            >
-                <Input
-                    prefix={<LockOutlined className="site-form-item-icon" />}
-                    type="password"
-                    placeholder="Password"
-                />
+                <Input />
             </Form.Item>
 
-            <Form.Item>
-                <Button type="primary" htmlType="submit" className="login-form-button">
-                    Log in
+            <Form.Item
+                label="Пароль"
+                name="пароль"
+                rules={[
+                    {
+                        required: true,
+                        message: 'Пожалуйста, введите пароль!',
+                    },
+                ]}
+            >
+                <Input.Password />
+            </Form.Item>
+
+            <Form.Item
+                name="remember"
+                valuePropName="checked"
+                wrapperCol={{
+                    offset: 8,
+                    span: 16,
+                }}
+            >
+                <Checkbox>Запомнить меня</Checkbox>
+            </Form.Item>
+
+            <Form.Item
+                wrapperCol={{
+                    offset: 8,
+                    span: 16,
+                }}
+            >
+                <Button type="primary" htmlType="submit">
+                    Submit
                 </Button>
             </Form.Item>
         </Form>
