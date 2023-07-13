@@ -10,10 +10,7 @@ import {
 
 const ArchivePage = () => {
     const navigate = useNavigate();
-    const [collapsed, setCollapsed] = useState(false);
-    const toggleCollapsed = () => {
-        setCollapsed(!collapsed);
-    };
+    const [collapsed] = useState(false);
 
     return (
         <Header
@@ -53,7 +50,7 @@ const ArchivePage = () => {
                     <p>Архив</p>
                 </Menu.Item>
                 <Menu.Item icon={<DeleteOutlined/>} onClick={() => navigate("/workspace/bin")}>
-                    <p>Удалённое</p>
+                    <p>Корзина</p>
                 </Menu.Item>
             </Menu>
         </Header>
