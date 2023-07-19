@@ -215,7 +215,7 @@ const MyTasksPage = () => {
 
             <div style={{ display: "flex", flexWrap: "wrap", marginTop: 10, position: "absolute", left: "25%" }}>
                 {categories.map((category, index) => (
-                    <Card key={index} style={{ width: 300, margin: 10, borderColor: "black" }}>
+                    <Card key={index} style={{ width: 300, margin: 10, borderColor: "black", backfaceVisibility: "hidden" }}>
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderColor: "black" }}>
                             <h3 style={{ overflow: "hidden", textOverflow: "ellipsis" }}>{category.name}</h3>
                             <div>
