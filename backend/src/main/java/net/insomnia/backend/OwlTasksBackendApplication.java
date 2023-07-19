@@ -1,4 +1,4 @@
-package net.insomnia.owltasksbackend;
+package net.insomnia.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
